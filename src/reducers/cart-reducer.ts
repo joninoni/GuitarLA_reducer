@@ -11,6 +11,14 @@ export type CartActions =
     {type:"clear-cart"}
 
 
+const initialCart = ():CartItem[] =>{
+    //recuperando el arreglo
+    const localStorageCart = localStorage.getItem("cart")
+    //si hay algo lo retornamos si no retornamos un arreglo vacio
+    return localStorageCart? JSON.parse(localStorageCart) : []
+}
+
+
 //el type de nuestro estado inicial
 export type CartState = {
     data : Guitar[]
@@ -20,7 +28,7 @@ export type CartState = {
 //nuestro estado inicial
 export const initialState : CartState = {
     data : db,
-    cart : [],
+    cart : initialCart(),
 }
 
 const MIN_ITEMS = 1
