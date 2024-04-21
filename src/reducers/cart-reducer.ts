@@ -68,8 +68,17 @@ export const cartReducer = (
     }
 
     if(action.type === "decrease-quantity"){
+        const cart = state.cart.map( item => {
+            if(item.id === action.payload.id && item.quantity > MIN_ITEMS){
+                return {...item, quantity: item.quantity -1}
+            }
+            else{
+                return item
+            }
+        })
         return{
-            ...state
+            ...state,
+            cart
         }
     }
 
