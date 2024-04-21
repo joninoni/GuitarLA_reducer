@@ -5,14 +5,11 @@ import { CartActions } from "../reducers/cart-reducer"
 type HeaderProps = {
     cart: CartItem[]
     dispatch:Dispatch<CartActions>
-
-    clearCart: () => void
 }
 
 export default function Header({
         cart, 
-        dispatch,
-        clearCart, 
+        dispatch, 
     } : HeaderProps ) {
 
     const isEmpty = useMemo( () => cart.length === 0, [cart])
@@ -99,7 +96,7 @@ export default function Header({
 
                                 <button 
                                     className="btn btn-dark w-100 mt-3 p-2"
-                                    onClick={clearCart}
+                                    onClick={ () => dispatch({type:"clear-cart"})}
                                 >Vaciar Carrito</button>
                             </div>
                         </div>
