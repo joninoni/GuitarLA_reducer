@@ -7,7 +7,7 @@ export type CartActions =
     {type:"add-to-cart",payload : {item : Guitar}}|
     {type:"remove-from-cart",payload : {id : Guitar["id"]}}|
     {type:"decrease-quantity",payload : {id : Guitar["id"]}}|
-    {type:"increase-qunatity",payload : {id : Guitar["id"]}}|
+    {type:"increase-quantity",payload : {id : Guitar["id"]}}|
     {type:"clear-cart"}
 
 
@@ -73,9 +73,19 @@ export const cartReducer = (
         }
     }
 
-    if(action.type === "increase-qunatity"){
+    if(action.type === "increase-quantity"){
+        const cart = state.cart.map( item => {
+            if(item.id === action.payload.id && item.quantity < MAX_ITEMS) {
+                return {
+                    ...item,
+                    quantity: item.quantity + 1
+                }
+            }
+            return item
+        })
         return{
-            ...state
+            ...state,
+            cart
         }
     }
 
